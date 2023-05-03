@@ -1,8 +1,8 @@
 package com.app;
 
-import java.io.Serializable;
-
 import jakarta.enterprise.inject.Model;
+
+import java.io.Serializable;
 
 //import com.jk.core.annotations.DataAccess;
 
