@@ -2,26 +2,17 @@ package com.app.data;
 
 import java.io.Serializable;
 
-public class City implements Serializable {
+public class City {
 
 	private int id;
 	private String name;
 	private String countryCode;
 	private String district;
 	private int population;
+
 	
 	public City() {
-		
 	}
-
-	public City(int id, String name, String countryCode, String district, int population) {
-		this.id = id;
-		this.name = name;
-		this.countryCode = countryCode;
-		this.district = district;
-		this.population = population;
-	}
-
 	public int getId() {
 		return id;
 	}

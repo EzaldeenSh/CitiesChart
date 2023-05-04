@@ -3,7 +3,6 @@ package com.app.data;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class CitiesService {
 
@@ -43,8 +42,6 @@ public class CitiesService {
     public int getMaxPopulation(){
         if(maxPopulation == 0)
             maxPopulation = calculateMaxPopulation();
-
-
         return maxPopulation;
     }
     private int calculateMaxPopulation(){

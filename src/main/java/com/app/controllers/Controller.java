@@ -2,6 +2,7 @@ package com.app.controllers;
 
 
 import com.app.data.CitiesService;
+import com.app.data.City;
 import com.jk.web.faces.controllers.JKWebController;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
@@ -20,7 +21,6 @@ import java.util.List;
 @ViewScoped
 public class Controller extends JKWebController {
     private CitiesService citiesService;
-    private String name;
     private BarChartModel barModel;
 
     public Controller() {
@@ -35,12 +35,6 @@ public class Controller extends JKWebController {
     @PostConstruct
     public void init() {
         createChart();
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
     }
     public void createChart() {
         barModel = new BarChartModel();
@@ -89,18 +83,15 @@ public class Controller extends JKWebController {
 
         data.addChartDataSet(maxLineDataSet);
 
-
-
-
-
-
-
         List<String> labels = citiesService.getCitiesNames();
         data.setLabels(labels);
 
         barModel.setData(data);
 
 
+    }
+    public List<City> getCities(){
+        return citiesService.getFirst12Cities();
     }
     public BarChartModel getBarModel() {
         return barModel;
