@@ -7,14 +7,18 @@ import com.jk.web.faces.controllers.JKWebController;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import org.primefaces.PrimeFaces;
+import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.charts.ChartData;
 import org.primefaces.model.charts.bar.BarChartDataSet;
 import org.primefaces.model.charts.bar.BarChartModel;
 import org.primefaces.model.charts.line.LineChartDataSet;
 
+import java.awt.event.ItemEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 @Named("controller")
@@ -22,20 +26,42 @@ import java.util.List;
 public class Controller extends JKWebController {
     private CitiesService citiesService;
     private BarChartModel barModel;
-
+    private List<City> cities;
+    private City selectedCity;
     public Controller() {
         try {
             citiesService = CitiesService.getInstance();
+            cities = citiesService.getFirst12Cities();
+//            selectedCity = cities.get(0);
         } catch (SQLException e) {
             // Handle the sql exception using JK framework;
 
             System.out.println("Invalid SQL connection!");
         }
     }
+
+    public City getSelectedCity() {
+        return selectedCity;
+    }
+
     @PostConstruct
     public void init() {
         createChart();
     }
+    public void displayInfo(ItemSelectEvent event){
+
+        int index = event.getItemIndex();
+        System.out.println("Pressed, index is: " + index);
+        PrimeFaces current = PrimeFaces.current();
+        this.setSelectedCity(cities.get(index));
+        current.executeScript("PF('cityInfo').show();");
+
+    }
+
+    public void setSelectedCity(City SelectedCity) {
+        this.selectedCity = SelectedCity;
+}
+
     public void createChart() {
         barModel = new BarChartModel();
         ChartData data = new ChartData();
@@ -43,11 +69,14 @@ public class Controller extends JKWebController {
 
         BarChartDataSet barDataSet = new BarChartDataSet();
         barDataSet.setLabel("Cities");
+        List<String> bgColors = generateBackGroundColors();
+        barDataSet.setBackgroundColor(bgColors);
+
+
+
 
 
         List<Number> values = citiesService.getCitiesPopulations();
-
-//        Double average = values.stream().mapToDouble(val -> (double) val).average().orElse(0.0);
 
         barDataSet.setData(values);
         data.addChartDataSet(barDataSet);
@@ -87,12 +116,24 @@ public class Controller extends JKWebController {
         data.setLabels(labels);
 
         barModel.setData(data);
-
-
     }
+
     public List<City> getCities(){
         return citiesService.getFirst12Cities();
     }
+    private List<String> generateBackGroundColors(){
+        Random random = new Random();
+        List<String> colors = new ArrayList<>();
+        for(int i = 0 ; i < citiesService.getListSize() ; i++){
+            int red = random.nextInt(255);
+            int green = random.nextInt(255);
+            int blue = random.nextInt(255);
+        colors.add("rgb("+red+", "+green+", "+blue+")");
+        }
+
+        return colors;
+    }
+
     public BarChartModel getBarModel() {
         return barModel;
     }

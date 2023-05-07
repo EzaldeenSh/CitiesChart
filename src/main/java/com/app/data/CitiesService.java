@@ -20,6 +20,9 @@ public class CitiesService {
             instance = new CitiesService();
         return instance;
     }
+    public int getListSize(){
+        return first12Cities.size();
+    }
 
     public List<City> getFirst12Cities() {
         return first12Cities;

@@ -7,65 +7,141 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
 </h:head>
+
 <h:body>
 
-        <!--	<h:form>-->
-        <!--		<p:autoUpdate />-->
-        <!--		<p:growl />-->
-        <!--		<p:panelGrid columns="2" style="margin:auto">-->
-        <!--			<f:facet name="header">-->
-        <!--				<h:outputText value="Smart-Cloud-Web Demo" />-->
-        <!--			</f:facet>-->
-        <!--			<p:outputLabel value="Please enter you name: " />-->
-        <!--			<p:inputText value="#{controller.name}" />-->
-        <!--			<f:facet name="footer">-->
-        <!--				<p:commandButton value="Say Hello" action="#{controller.sayHello()}" />-->
-        <!--				<p:commandButton value="Say Hello to Jalal" action="#{controller.sayHello('Jalal')}" />-->
-        <!--			</f:facet>-->
-        <!--		</p:panelGrid>-->
-        <!--	</h:form>-->
+    <!--	<h:form>-->
+    <!--		<p:autoUpdate />-->
+    <!--		<p:growl />-->
+    <!--		<p:panelGrid columns="2" style="margin:auto">-->
+    <!--			<f:facet name="header">-->
+    <!--				<h:outputText value="Smart-Cloud-Web Demo" />-->
+    <!--			</f:facet>-->
+    <!--			<p:outputLabel value="Please enter you name: " />-->
+    <!--			<p:inputText value="#{controller.name}" />-->
+    <!--			<f:facet name="footer">-->
+    <!--				<p:commandButton value="Say Hello" action="#{controller.sayHello()}" />-->
+    <!--				<p:commandButton value="Say Hello to Jalal" action="#{controller.sayHello('Jalal')}" />-->
+    <!--			</f:facet>-->
+    <!--		</p:panelGrid>-->
+    <!--	</h:form>-->
 
+    <p:dialog header="Selected City" id="myDialogID" widgetVar="cityInfo">
+        <h:outputText value="ID: #{controller.selectedCity.id}"/> <br />
+        <h:outputText value="Name: #{controller.selectedCity.name}"/><br />
+        <h:outputText value="Country Code: #{controller.selectedCity.countryCode}"/><br />
+        <h:outputText value="District: #{controller.selectedCity.district}"/><br />
+        <h:outputText value="Population: #{controller.selectedCity.population}"/>
+
+
+    </p:dialog>
+    <h:form>
         <div class="card">
-            <h2>Basic</h2>
-            <p:barChart model="#{controller.barModel}" style="width: 100%; height: 500px;"/>
+            <p:barChart model="#{controller.barModel}" style="width: 100%; height: 500px;">
+                <p:ajax event="itemSelect" listener="#{controller.displayInfo}" update=":myDialogID"/>
+
+            </p:barChart>
+
+
 
         </div>
-    <div align="center" style="padding-top: 50px">
+        <div align="center" style="padding-top: 50px">
 
-        <p:commandButton type="button" value="Show Data Table"
-                         styleClass="rounded-button ui-button-info"
-                         onclick="PF('dlg1').show()"/>
+            <p:commandButton type="button" value="Show Data Table"
+                             styleClass="rounded-button ui-button-info"
+                             onclick="PF('dlg1').show()"/>
 
-        <p:dialog widgetVar="dlg1" height="500" width="1000">
-            <p:dataTable id="cities" var="city" value="#{controller.cities}" paginator="true" rows="10"
-                         aginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                         rowsPerPageTemplate="5,10,15"
+            <p:dialog widgetVar="dlg1" height="500" width="1000">
+                <p:dataTable id="cities" var="city" value="#{controller.cities}" paginator="true" rows="10"
+                             aginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="5,10,15"
 
-            >
-                <f:facet name="header">
-                    Cities Data
-                </f:facet>
+                >
+                    <f:facet name="header">
+                        Cities Data
+                    </f:facet>
 
-                <p:column headerText="ID" sortBy="#{city.id}" filterBy="#{city.id}" filterMatchMode="exact">
-                    <h:outputText value="#{city.id}" />
-                </p:column>
-                <p:column headerText="Name" sortBy="#{city.name}" filterBy="#{city.name}" filterMatchMode="exact">
-                    <h:outputText value="#{city.name}" />
-                </p:column>
-                <p:column headerText="Country Code" sortBy="#{city.countryCode}" filterBy="#{city.countryCode}" filterMatchMode="exact">
-                    <h:outputText value="#{city.countryCode}" />
-                </p:column>
-                <p:column headerText="District" sortBy="#{city.district}" filterBy="#{city.district}" filterMatchMode="exact">
-                    <h:outputText value="#{city.district}" />
-                </p:column>
+                    <p:column headerText="ID" sortBy="#{city.id}" filterBy="#{city.id}" filterMatchMode="exact">
+                        <h:outputText value="#{city.id}"/>
+                    </p:column>
+                    <p:column headerText="Name" sortBy="#{city.name}" filterBy="#{city.name}" filterMatchMode="exact">
+                        <h:outputText value="#{city.name}"/>
+                    </p:column>
+                    <p:column headerText="Country Code" sortBy="#{city.countryCode}" filterBy="#{city.countryCode}"
+                              filterMatchMode="exact">
+                        <h:outputText value="#{city.countryCode}"/>
+                    </p:column>
+                    <p:column headerText="District" sortBy="#{city.district}" filterBy="#{city.district}"
+                              filterMatchMode="exact">
+                        <h:outputText value="#{city.district}"/>
+                    </p:column>
 
-                <p:column headerText="Population" sortBy="#{city.population}" filterBy="#{city.population}" filterMatchMode="exact">
-                    <h:outputText value="#{city.population}" />
-                </p:column>
-            </p:dataTable>
-        </p:dialog>
+                    <p:column headerText="Population" sortBy="#{city.population}" filterBy="#{city.population}"
+                              filterMatchMode="exact">
+                        <h:outputText value="#{city.population}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+        </div>
+
+    </h:form>
+    <h4>Test 2</h4>
+    <div class="svgContainer">
+        <svg width="495" height="263" viewBox="0 0 495 263" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+
+            <path d="M0 81C65.6081 81 102.392 81 168 81V263H0V81Z" fill="#D9D9D9" id="leftBox"/>
+
+
+            <path d="M327 78H495V260H327V78Z" fill="#D9D9D9"/>
+            <path d="M407 78V1H79V81.5" stroke="black"/>
+
+        </svg>
+        <div class="circle"></div>
+        <div class="circle second"></div>
+        <div class="circle third"></div>
+
     </div>
 
+
+    <style type="text/css">
+        .svgContainer {
+            position: relative;
+
+        }
+
+        .circle {
+            position: absolute;
+            offset-path: path("M407 78V1H79V81.5");
+            animation: move infinite reverse linear 2.5s;
+
+            width: 20px;
+            height: 20px;
+            background: darkcyan;
+            border-radius: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .second {
+            animation-delay: 175ms;
+        }
+
+        .third {
+            animation-delay: 350ms;
+        }
+
+        @keyframes move {
+            0% {
+                offset-distance: 0;
+            }
+            100% {
+                offset-distance: 100%;
+            }
+
+        }
+
+    </style>
 
 </h:body>
 </html>
