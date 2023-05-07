@@ -10,21 +10,6 @@
 
 <h:body>
 
-    <!--	<h:form>-->
-    <!--		<p:autoUpdate />-->
-    <!--		<p:growl />-->
-    <!--		<p:panelGrid columns="2" style="margin:auto">-->
-    <!--			<f:facet name="header">-->
-    <!--				<h:outputText value="Smart-Cloud-Web Demo" />-->
-    <!--			</f:facet>-->
-    <!--			<p:outputLabel value="Please enter you name: " />-->
-    <!--			<p:inputText value="#{controller.name}" />-->
-    <!--			<f:facet name="footer">-->
-    <!--				<p:commandButton value="Say Hello" action="#{controller.sayHello()}" />-->
-    <!--				<p:commandButton value="Say Hello to Jalal" action="#{controller.sayHello('Jalal')}" />-->
-    <!--			</f:facet>-->
-    <!--		</p:panelGrid>-->
-    <!--	</h:form>-->
 
     <p:dialog header="Selected City" id="myDialogID" widgetVar="cityInfo">
         <h:outputText value="ID: #{controller.selectedCity.id}"/> <br />
@@ -32,9 +17,8 @@
         <h:outputText value="Country Code: #{controller.selectedCity.countryCode}"/><br />
         <h:outputText value="District: #{controller.selectedCity.district}"/><br />
         <h:outputText value="Population: #{controller.selectedCity.population}"/>
-
-
     </p:dialog>
+
     <h:form>
         <div class="card">
             <p:barChart model="#{controller.barModel}" style="width: 100%; height: 500px;">
@@ -56,28 +40,36 @@
                              aginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                              rowsPerPageTemplate="5,10,15"
 
+
                 >
+<!--                    <h5>Multiple</h5>-->
+<!--                    <p:selectCheckboxMenu id="multiple" value="#{checkboxView.selectedCities2}" label="Cities" style="min-width: 15rem"-->
+<!--                                          multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width: 30rem" scrollHeight="250"-->
+<!--                                          emptyLabel="Please select..." updateLabel="true">-->
+<!--                        <p:ajax event="itemUnselect" listener="#{checkboxView.onItemUnselect}"/>-->
+<!--                        <f:selectItems value="#{checkboxView.cities}"/>-->
+<!--                    </p:selectCheckboxMenu>-->
                     <f:facet name="header">
                         Cities Data
                     </f:facet>
 
-                    <p:column headerText="ID" sortBy="#{city.id}" filterBy="#{city.id}" filterMatchMode="exact">
+                    <p:column headerText="ID" sortBy="#{city.id}" filterBy="#{city.id}" filterMatchMode="startsWith">
                         <h:outputText value="#{city.id}"/>
                     </p:column>
-                    <p:column headerText="Name" sortBy="#{city.name}" filterBy="#{city.name}" filterMatchMode="exact">
+                    <p:column headerText="Name" sortBy="#{city.name}" filterBy="#{city.name}" filterMatchMode="startsWith">
                         <h:outputText value="#{city.name}"/>
                     </p:column>
                     <p:column headerText="Country Code" sortBy="#{city.countryCode}" filterBy="#{city.countryCode}"
-                              filterMatchMode="exact">
+                              filterMatchMode="startsWith">
                         <h:outputText value="#{city.countryCode}"/>
                     </p:column>
                     <p:column headerText="District" sortBy="#{city.district}" filterBy="#{city.district}"
-                              filterMatchMode="exact">
+                              filterMatchMode="startsWith">
                         <h:outputText value="#{city.district}"/>
                     </p:column>
 
                     <p:column headerText="Population" sortBy="#{city.population}" filterBy="#{city.population}"
-                              filterMatchMode="exact">
+                              filterMatchMode="startsWith">
                         <h:outputText value="#{city.population}"/>
                     </p:column>
                 </p:dataTable>
@@ -97,9 +89,9 @@
             <path d="M407 78V1H79V81.5" stroke="black"/>
 
         </svg>
-        <div class="circle"></div>
-        <div class="circle second"></div>
-        <div class="circle third"></div>
+        <div class="circle"> </div>
+        <div class="circle second"> </div>
+        <div class="circle third"> </div>
 
     </div>
 

@@ -51,9 +51,8 @@ public class Controller extends JKWebController {
     public void displayInfo(ItemSelectEvent event){
 
         int index = event.getItemIndex();
-        System.out.println("Pressed, index is: " + index);
         PrimeFaces current = PrimeFaces.current();
-        this.setSelectedCity(cities.get(index));
+        setSelectedCity(cities.get(index));
         current.executeScript("PF('cityInfo').show();");
 
     }
