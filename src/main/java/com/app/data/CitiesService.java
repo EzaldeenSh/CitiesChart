@@ -42,6 +42,7 @@ public class CitiesService {
         }
         return names;
     }
+
     public int getMaxPopulation(){
         if(maxPopulation == 0)
             maxPopulation = calculateMaxPopulation();

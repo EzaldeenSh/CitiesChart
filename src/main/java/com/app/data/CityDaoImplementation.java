@@ -23,12 +23,9 @@ public class CityDaoImplementation implements CityDao {
 		}
 		return instance;
 	}
-
-
-
 	@Override
 	public List<City> getAllCities() throws SQLException {
-		String sql = "select * from city limit 12";
+		String sql = "select * from city where ID != 1 limit 15";
 		PreparedStatement preparedStatement =connection.prepareStatement(sql);
 		resultSet = preparedStatement.executeQuery();
 		List<City> cities = new ArrayList<>();

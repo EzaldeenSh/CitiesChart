@@ -1,10 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+>
 <h:head>
 </h:head>
 
@@ -21,10 +22,13 @@
 
     <h:form>
         <div class="card">
-            <p:barChart model="#{controller.barModel}" style="width: 100%; height: 500px;">
+
+            <p:lineChart model="#{controller.chartModel}" style="width: 100%; height: 500px;">
+
                 <p:ajax event="itemSelect" listener="#{controller.displayInfo}" update=":myDialogID"/>
 
-            </p:barChart>
+            </p:lineChart>
+
 
 
 
@@ -37,18 +41,12 @@
 
             <p:dialog widgetVar="dlg1" height="500" width="1000">
                 <p:dataTable id="cities" var="city" value="#{controller.cities}" paginator="true" rows="10"
-                             aginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                              rowsPerPageTemplate="5,10,15"
 
 
                 >
-<!--                    <h5>Multiple</h5>-->
-<!--                    <p:selectCheckboxMenu id="multiple" value="#{checkboxView.selectedCities2}" label="Cities" style="min-width: 15rem"-->
-<!--                                          multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width: 30rem" scrollHeight="250"-->
-<!--                                          emptyLabel="Please select..." updateLabel="true">-->
-<!--                        <p:ajax event="itemUnselect" listener="#{checkboxView.onItemUnselect}"/>-->
-<!--                        <f:selectItems value="#{checkboxView.cities}"/>-->
-<!--                    </p:selectCheckboxMenu>-->
+
                     <f:facet name="header">
                         Cities Data
                     </f:facet>
@@ -77,7 +75,7 @@
         </div>
 
     </h:form>
-    <h4>Test 2</h4>
+
     <div class="svgContainer">
         <svg width="495" height="263" viewBox="0 0 495 263" fill="none" xmlns="http://www.w3.org/2000/svg">
 
@@ -86,6 +84,7 @@
 
 
             <path d="M327 78H495V260H327V78Z" fill="#D9D9D9"/>
+
             <path d="M407 78V1H79V81.5" stroke="black"/>
 
         </svg>
@@ -96,12 +95,14 @@
     </div>
 
 
+
+
+
     <style type="text/css">
         .svgContainer {
             position: relative;
 
         }
-
         .circle {
             position: absolute;
             offset-path: path("M407 78V1H79V81.5");
