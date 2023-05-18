@@ -12,7 +12,7 @@ public class BarChartBuilder extends ChartBuilder{
     @Override
     ChartModel createChart(List<ChartInfo> chartInfoList) {
         BarChartModel barChartModel = new BarChartModel();
-        ChartData data = new ChartData();]
+        ChartData data = new ChartData();
 
         for(ChartInfo chartInfo : chartInfoList){
             BarChartDataSet barChartDataSet = new BarChartDataSet();
