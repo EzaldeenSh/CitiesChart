@@ -28,8 +28,8 @@ public class CitiesService {
         return first12Cities;
     }
 
-    public List<Number> getCitiesPopulations(){
-        List<Number> populations = new ArrayList<>();
+    public List<Object> getCitiesPopulations(){
+        List<Object> populations = new ArrayList<>();
         for(City city : first12Cities){
             populations.add(city.getPopulation());
         }

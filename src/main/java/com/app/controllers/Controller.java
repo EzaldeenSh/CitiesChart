@@ -1,24 +1,18 @@
 package com.app.controllers;
 
 
-import com.app.BarChartInfo;
-import com.app.ChartInfo;
-import com.app.ChartsFactory;
-import com.app.LineChartInfo;
+import com.app.factory.ChartInfo;
 import com.app.data.CitiesService;
 import com.app.data.City;
+import com.app.factory.ChartType;
 import com.jk.web.faces.controllers.JKWebController;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.ItemSelectEvent;
-import org.primefaces.model.charts.ChartData;
 import org.primefaces.model.charts.ChartModel;
-import org.primefaces.model.charts.ChartOptions;
-import org.primefaces.model.charts.bar.BarChartDataSet;
 import org.primefaces.model.charts.bar.BarChartModel;
-import org.primefaces.model.charts.line.LineChartDataSet;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -82,25 +76,28 @@ public class Controller extends JKWebController {
     }
 
     public void createChart() {
-        BarChartInfo barChartInfo = new BarChartInfo(
-                citiesService.getCitiesNames(),
-                citiesService.getCitiesPopulations(),
-                "TEST",
-                "Cities",
-                null
-        );
 
-        LineChartInfo lineChartInfo = new LineChartInfo(citiesService.getCitiesNames(),
-                Arrays.asList(citiesService.getCitiesPopulations().toArray()),
-                "TEST2",
-                "MYLABEL",
-                null
-        );
-        chartsInfos.add(barChartInfo);
-        chartsInfos.add(lineChartInfo);
+        ChartInfo chartInfo = new ChartInfo(citiesService.getCitiesNames(),
+                citiesService.getCitiesPopulations(), "extender","Label", ChartType.BAR);
 
 
-        chartModel = ChartsFactory.createCombinedChart(barChartInfo, lineChartInfo);
+//        BarChartInfo barChartInfo = new BarChartInfo(
+//                citiesService.getCitiesNames(),
+//                citiesService.getCitiesPopulations(),
+//                "TEST",
+//                "Cities"
+//        );
+//
+//        LineChartInfo lineChartInfo = new LineChartInfo(citiesService.getCitiesNames(),
+//                Arrays.asList(citiesService.getCitiesPopulations().toArray()),
+//                "TEST2",
+//                "MYLABEL"
+//        );
+//        chartsInfos.add(barChartInfo);
+//        chartsInfos.add(lineChartInfo);
+
+
+//        chartModel = ChartsFactory.createCombinedChart(lineChartInfo, barChartInfo);
 
 
 
@@ -153,10 +150,7 @@ public class Controller extends JKWebController {
 //
 //        barModel.setData(data);
     }
-    public boolean isBar(){
-        return chartsInfos.get(0) instanceof BarChartInfo;
 
-    }
 
     public List<City> getCities() {
         return citiesService.getFirst12Cities();
