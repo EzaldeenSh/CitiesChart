@@ -16,13 +16,18 @@ public class ChartsFactory {
     public List<ChartModel> createCharts(List<List<ChartInfo>> infos){
         List<ChartModel> chartModels = new ArrayList<>();
         for(List<ChartInfo> info : infos){
-            switch (info.get(0).chartType()){
-                case LINE -> {
+            switch (info.get(0).chartType()) {
+                case LINE:
                     chartModels.add(new LineChartBuilder().createChart(info));
-                }
-                case BAR ->  {
+                    break;
+                case BAR:
                     chartModels.add(new BarChartBuilder().createChart(info));
-                }
+                    break;
+                case PIE:
+                    // add a new class for the PIE chart.
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + info.get(0).chartType());
             }
         }
         return chartModels;

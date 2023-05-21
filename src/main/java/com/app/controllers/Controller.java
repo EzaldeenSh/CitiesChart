@@ -5,6 +5,7 @@ import com.app.factory.ChartInfo;
 import com.app.data.CitiesService;
 import com.app.data.City;
 import com.app.factory.ChartType;
+import com.app.factory.ChartsFactory;
 import com.jk.web.faces.controllers.JKWebController;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
@@ -78,7 +79,13 @@ public class Controller extends JKWebController {
     public void createChart() {
 
         ChartInfo chartInfo = new ChartInfo(citiesService.getCitiesNames(),
-                citiesService.getCitiesPopulations(), "extender","Label", ChartType.BAR);
+                citiesService.getCitiesPopulations(), "extender","Label", ChartType.LINE);
+
+        List<ChartInfo> chartInfos = new ArrayList<>();
+        chartInfos.add(chartInfo);
+        List<List<ChartInfo>> chartsInfos = new ArrayList<>();
+        chartsInfos.add(chartInfos);
+        chartModel = ChartsFactory.getInstance().createCharts(chartsInfos).get(0);
 
 
 //        BarChartInfo barChartInfo = new BarChartInfo(

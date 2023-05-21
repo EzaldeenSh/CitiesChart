@@ -18,6 +18,7 @@ public class BarChartBuilder extends ChartBuilder{
             BarChartDataSet barChartDataSet = new BarChartDataSet();
             barChartDataSet.setLabel(chartInfo.label());
             barChartDataSet.setData(chartInfo.values().stream().map(o -> (Number) o).collect(Collectors.toList()));
+            data.addChartDataSet(barChartDataSet);
         }
 
         data.setLabels(chartInfoList.get(0).labels());
