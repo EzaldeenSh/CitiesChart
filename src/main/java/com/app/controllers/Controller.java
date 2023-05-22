@@ -30,10 +30,8 @@ public class Controller extends JKWebController {
     private List<City> cities;
     private City selectedCity;
     private ChartModel chartModel;
-    private final List<ChartInfo> chartsInfos;
 
     public Controller() {
-        chartsInfos = new ArrayList<>();
         try {
             citiesService = CitiesService.getInstance();
             cities = citiesService.getFirst12Cities();
@@ -81,81 +79,19 @@ public class Controller extends JKWebController {
         ChartInfo chartInfo = new ChartInfo(citiesService.getCitiesNames(),
                 citiesService.getCitiesPopulations(), "extender","Label", ChartType.LINE);
 
+
+        ChartInfo chartInfoBar = new ChartInfo(citiesService.getCitiesNames(),
+                citiesService.getCitiesPopulations(), "extender","N", ChartType.BAR);
+
+
         List<ChartInfo> chartInfos = new ArrayList<>();
         chartInfos.add(chartInfo);
+        chartInfos.add(chartInfoBar);
         List<List<ChartInfo>> chartsInfos = new ArrayList<>();
         chartsInfos.add(chartInfos);
         chartModel = ChartsFactory.getInstance().createCharts(chartsInfos).get(0);
 
 
-//        BarChartInfo barChartInfo = new BarChartInfo(
-//                citiesService.getCitiesNames(),
-//                citiesService.getCitiesPopulations(),
-//                "TEST",
-//                "Cities"
-//        );
-//
-//        LineChartInfo lineChartInfo = new LineChartInfo(citiesService.getCitiesNames(),
-//                Arrays.asList(citiesService.getCitiesPopulations().toArray()),
-//                "TEST2",
-//                "MYLABEL"
-//        );
-//        chartsInfos.add(barChartInfo);
-//        chartsInfos.add(lineChartInfo);
-
-
-//        chartModel = ChartsFactory.createCombinedChart(lineChartInfo, barChartInfo);
-
-
-
-//        barModel = new BarChartModel();
-//        ChartData data = new ChartData();
-//
-//
-//        BarChartDataSet barDataSet = new BarChartDataSet();
-//        barDataSet.setLabel("Cities");
-//        List<String> bgColors = generateBackGroundColors();
-////        barDataSet.setBackgroundColor(bgColors);
-//        List<Number> values = citiesService.getCitiesPopulations();
-//
-//        barDataSet.setData(values);
-//        data.addChartDataSet(barDataSet);
-//
-//        LineChartDataSet averageLineDataSet = new LineChartDataSet();
-//        List<Object> lineAverageValues = new ArrayList<>(values);
-//
-////        double averagePopulation = citiesService.getAveragePopulation();
-////        for(int i = 0 ; i < values.size() ; i++){
-////            lineAverageValues.add(averagePopulation);
-////        }
-//
-//        averageLineDataSet.setData(lineAverageValues);
-////        averageLineDataSet.setFill(false);
-//        averageLineDataSet.setLabel("Average");
-////        averageLineDataSet.setBorderColor("rgb(75, 192, 192)");
-//        averageLineDataSet.setTension(0);
-//
-//        data.addChartDataSet(averageLineDataSet);
-//
-//        LineChartDataSet maxLineDataSet = new LineChartDataSet();
-//        List<Object> lineMaxValues = new ArrayList<>();
-//        int maxPopulation = citiesService.getMaxPopulation();
-//        for(int i  = 0 ; i < values.size() ; i++){
-//            lineMaxValues.add(maxPopulation);
-//        }
-//        maxLineDataSet.setData(lineMaxValues);
-//        maxLineDataSet.setFill(false);
-//        maxLineDataSet.setLabel("Max");
-////        maxLineDataSet.setBorderColor("rgb(255, 0, 0)");
-//        maxLineDataSet.setTension(0);
-//
-//
-//        data.addChartDataSet(maxLineDataSet);
-//
-//        List<String> labels = citiesService.getCitiesNames();
-//        data.setLabels(labels);
-//
-//        barModel.setData(data);
     }
 
 

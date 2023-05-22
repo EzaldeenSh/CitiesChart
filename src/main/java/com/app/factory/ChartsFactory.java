@@ -1,6 +1,10 @@
 package com.app.factory;
 
+import org.primefaces.model.charts.ChartData;
 import org.primefaces.model.charts.ChartModel;
+import org.primefaces.model.charts.bar.BarChartModel;
+import org.primefaces.model.charts.line.LineChartDataSet;
+
 import java.util.ArrayList;
 import java.util.List;
 public class ChartsFactory {
@@ -15,21 +19,30 @@ public class ChartsFactory {
 
     public List<ChartModel> createCharts(List<List<ChartInfo>> infos){
         List<ChartModel> chartModels = new ArrayList<>();
-        for(List<ChartInfo> info : infos){
-            switch (info.get(0).chartType()) {
-                case LINE:
-                    chartModels.add(new LineChartBuilder().createChart(info));
-                    break;
-                case BAR:
-                    chartModels.add(new BarChartBuilder().createChart(info));
-                    break;
-                case PIE:
-                    // add a new class for the PIE chart.
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + info.get(0).chartType());
+        for(List<ChartInfo> chartInfos: infos){
+            BarChartModel barChartModel = new BarChartModel();
+            ChartData chartData = new ChartData();
+
+            for(ChartInfo chartInfo : chartInfos){
+                switch (chartInfo.chartType()){
+                    case BAR :
+                        chartData.addChartDataSet(new BarDataSetBuilder().createDataSet(chartInfo));
+                        break;
+
+                    case LINE:
+                        chartData.addChartDataSet(new LineDataSetBuilder().createDataSet(chartInfo));
+                        break;
+                }
+
             }
+
+
+            chartData.setLabels(chartInfos.get(0).labels());
+            barChartModel.setData(chartData);
+            chartModels.add(barChartModel);
         }
+
+
         return chartModels;
     }
 

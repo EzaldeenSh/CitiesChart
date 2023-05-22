@@ -23,11 +23,11 @@
     <h:form>
         <div class="card">
 
-            <p:lineChart model="#{controller.chartModel}" style="width: 100%; height: 500px;">
+            <p:barChart model="#{controller.chartModel}" style="width: 100%; height: 500px;">
 
                 <p:ajax event="itemSelect" listener="#{controller.displayInfo}" update=":myDialogID"/>
 
-            </p:lineChart>
+            </p:barChart>
 
 
 
