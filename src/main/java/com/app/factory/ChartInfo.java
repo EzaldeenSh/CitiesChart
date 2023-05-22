@@ -2,6 +2,9 @@ package com.app.factory;
 
 import java.util.List;
 import java.util.Objects;
+/**
+ * This is the info class, each value represents a value to be used to create a dataset for a chart
+ * */
 
 public final class ChartInfo {
     private final List<String> labels;
